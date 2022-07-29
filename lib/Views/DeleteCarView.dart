@@ -70,6 +70,7 @@ class _DeleteCarViewState extends State<DeleteCarView> {
                         icon: const Icon(Icons.search),
                         onPressed: () {
                           search(txtQuery.text);
+                          txtQuery.text = "";
                         },
                       ),
                     ),
