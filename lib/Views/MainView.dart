@@ -1,5 +1,6 @@
 // ignore_for_file: file_names, deprecated_member_use
 
+import 'package:appbasica/Controller/MainController.dart';
 import 'package:flutter/material.dart';
 
 //------------------------------------------------------------------------------
@@ -52,32 +53,28 @@ class _MainViewState extends State<MainView> {
 //------------------------------------------------------------------------------
 //------------------------------------------------------------------------------
 void entradaAuto(BuildContext context) {
-  // //Inicialización de la lista de Objetos Parqueos
-  // iniciarDatosController();
-  // // Validación si hay campos disponibles para agregar un nuevo auto
-  // if (disponibilidadController() == 0) {
-  //   //Mensaje en caso que no hayan mas espacios disponibles
-  //   mostrarAviso(context, "¡No hay mas espacios disponibles!");
-  // } else {
-  //   //Navegación a la ventana AddCar
-  //   Navigator.pushNamed(context, "AddCar");
-  // }
+  // Validación si hay campos disponibles para agregar un nuevo auto
+  if (getQuantityPlaques() == quantityParks()) {
+    //Mensaje en caso que no hayan mas espacios disponibles
+    mostrarAviso(context, "¡No hay mas espacios disponibles!");
+  } else {
+    //Navegación a la ventana AddCar
+    Navigator.pushNamed(context, "AddCar");
+  }
 }
 
 //------------------------------------------------------------------------------
 //------------------------------------------------------------------------------
 void salidaAuto(BuildContext context) {
-  // //Inicialización de la lista de Objetos Parqueos
-  // iniciarDatosController();
-  // //Validación si existe algún auto en el parqueo
-  // if (disponibilidadController() == 20) {
-  //   mostrarAviso(
-  //       context, "No hay ningun auto en el parqueo, espere a que ingrese uno");
-  // } else {
-  //   // Navegación hacia la pagina DeleteCar
-  //   llenarlistOcupadosController();
-  //   Navigator.pushNamed(context, "DeleteCar");
-  // }
+  //Validación si existe algún auto en el parqueo
+  if (getQuantityPlaques() == 0) {
+    mostrarAviso(
+        context, "No hay ningun auto en el parqueo, espere a que ingrese uno");
+  } else {
+    // Navegación hacia la pagina DeleteCar
+    fillTheBusysList();
+    Navigator.pushNamed(context, "DeleteCar");
+  }
 }
 
 //------------------------------------------------------------------------------
