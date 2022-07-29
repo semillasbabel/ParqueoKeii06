@@ -51,3 +51,8 @@ List getInfoClient(String placa) {
 void carParkPay(String placa) {
   parks.OldCar(placa);
 }
+
+void plaqueSearch(String plaque) {
+  listaOcupados.clear();
+  listaOcupados.add(parks.GetPlaques[plaque]);
+}

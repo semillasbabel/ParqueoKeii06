@@ -17,6 +17,26 @@ class DeleteCarView extends StatefulWidget {
 class _DeleteCarViewState extends State<DeleteCarView> {
   //Lista que obtendra los parqueos ocupados para mostrar en el listview
   var parqueosocupados = getBusyList();
+  String searchPlaque = "";
+
+  final llaveformulario = GlobalKey<FormState>();
+
+  TextEditingController txtQuery = TextEditingController();
+
+  void search(String datsearch) {
+    if (datsearch == "") {
+      fillTheBusysList();
+      setState(() {});
+    } else {
+      if (validationPlaque(datsearch)) {
+        dialogSearch(
+            context, "La placa: $datsearch no se encuentra registrada");
+      } else {
+        plaqueSearchCon(datsearch);
+        setState(() {});
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +46,45 @@ class _DeleteCarViewState extends State<DeleteCarView> {
         title: const Text("SALIDA"),
         centerTitle: true,
       ),
-      body: ListView.builder(
+      body: Column(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              margin: const EdgeInsets.all(10),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  TextFormField(
+                    controller: txtQuery,
+                    // onChanged: search,
+                    decoration: InputDecoration(
+                      hintText: "Search",
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(4.0)),
+                      focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.blue.shade900)),
+                      suffixIcon: IconButton(
+                        icon: const Icon(Icons.search),
+                        onPressed: () {
+                          search(txtQuery.text);
+                        },
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            _listView()
+          ]),
+    );
+  }
+
+  Widget _listView() {
+    return Expanded(
+      child: ListView.builder(
         itemCount: parqueosocupados.length,
         itemBuilder: (BuildContext context, index) {
           return ListTile(
@@ -87,11 +145,34 @@ class _DeleteCarViewState extends State<DeleteCarView> {
         barrierDismissible: true);
   }
 
+  void dialogSearch(BuildContext context, String info) {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text("¡Información!"),
+            content: Text(info),
+            actions: [
+              FlatButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: const Text("VOLVER")),
+            ],
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+          );
+        },
+        //Ocultar el dialogo al precionar fuera de el
+        barrierDismissible: true);
+  }
+
   void pagado(BuildContext context) {
     setState(() {
       //Mandamos a llamar a la función que liberara el espacio de parqueo
       parkPay(llaveDelete);
       listaOcupados.remove(llaveDelete);
+      fillTheBusysList();
       // Navigator.pushNamed(context, "MainView");
     });
   }

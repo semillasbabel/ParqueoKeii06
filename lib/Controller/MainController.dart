@@ -42,4 +42,7 @@ void parkPay(String placa) {
   carParkPay(placa);
 }
 
+void plaqueSearchCon(String plaque) {
+  plaqueSearch(plaque);
+}
 //-------------------------------------------------------------------
