@@ -1,6 +1,7 @@
 import 'package:appbasica/Views/AddCarView.dart';
 import 'package:appbasica/Views/DeleteCarView.dart';
 import 'package:appbasica/Views/MainView.dart';
+import 'package:appbasica/Views/QuantityParks.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(const MyApp());
@@ -17,6 +18,7 @@ class MyApp extends StatelessWidget {
           "MainView": (BuildContext context) => const MainView(),
           "AddCar": (BuildContext context) => const AddCarView(),
           "DeleteCar": (BuildContext context) => const DeleteCarView(),
+          "AddCant": (BuildContext context) => QuantityView(),
         });
   }
 }

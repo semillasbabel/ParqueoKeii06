@@ -53,6 +53,7 @@ class _MainViewState extends State<MainView> {
 //------------------------------------------------------------------------------
 void entradaAuto(BuildContext context) {
   if (quantityParks() == 0) {
+    Navigator.pushNamed(context, "AddCant");
   } else {
     // Validación si hay campos disponibles para agregar un nuevo auto
     if (getQuantityPlaques() == quantityParks()) {
