@@ -18,35 +18,28 @@ void fillTheBusysList() {
   clearAndFillTheBusyList();
 }
 
-// bool valiPlacaController(String placa) {
-//   return validarExistenciaPlaca(placa);
-// }
+bool validationPlaque(String placa) {
+  return validateplaque(placa);
+}
 
-// //Función para ingresar un auto nuevo al parqueadero
-// void nuevoAutoController(String datplaca, String datmodelo, String datpersona) {
-//   EntradaAuto(datplaca, datmodelo, datpersona);
-// }
+void newCar(String datplaca, String datmodelo, String datpersona) {
+  newCarinPark(datplaca, datmodelo, datpersona);
+}
 
-// //Función para obtener una lista de los parqueos ocupados
-// List listaOcupadosController() {
-//   return listaOcupados;
-// }
+List getBusyList() {
+  return listaOcupados;
+}
 
+int getPrice(String placa) {
+  return getPricePark(placa);
+}
 
+List getInfo(String placa) {
+  return getInfoClient(placa);
+}
 
-// //Función para obtener el precio por parqueo del auto seleccionado
-// int obtPrecioAutoController(String placa) {
-//   return obtenerPrecioParqueo(placa);
-// }
-
-// //Función para obtener el nombre del cliente y el modelo del auto seleccionado
-// List infoClienteController(String placa) {
-//   return obtenerInfoCliente(placa);
-// }
-
-// //Función para realizar el pago del parqueo y desocupar el espacio de parqueo
-// void parqueoPagadoController(String placa) {
-//   SalidaAuto(placa);
-// }
+void parkPay(String placa) {
+  carParkPay(placa);
+}
 
 //-------------------------------------------------------------------

@@ -1,7 +1,7 @@
 // ignore_for_file: unused_field, file_names, non_constant_identifier_names
 
 class Parkings {
-  late int _quantity;
+  int _quantity = 0;
   final Map _mapDisponibility = {};
   final Map _mapPlaque = {};
   final Map _mapModel = {};
@@ -54,5 +54,12 @@ class Parkings {
     }
 
     return precio;
+  }
+
+  List GetInfoClient(String datplaca) {
+    var ListaInfoCliente = <String>["", ""];
+    ListaInfoCliente[0] = _mapName[datplaca];
+    ListaInfoCliente[1] = _mapModel[datplaca];
+    return ListaInfoCliente;
   }
 }

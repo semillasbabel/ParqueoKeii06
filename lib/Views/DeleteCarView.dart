@@ -1,5 +1,7 @@
 // ignore_for_file: deprecated_member_use
 
+import 'package:appbasica/Controller/MainController.dart';
+import 'package:appbasica/Models/Parqueos.dart';
 import 'package:flutter/material.dart';
 
 //Declaración de variables globales
@@ -14,8 +16,7 @@ class DeleteCarView extends StatefulWidget {
 
 class _DeleteCarViewState extends State<DeleteCarView> {
   //Lista que obtendra los parqueos ocupados para mostrar en el listview
-  // var parqueosocupados = listaOcupadosController();
-  var parqueosocupados = [];
+  var parqueosocupados = getBusyList();
 
   @override
   Widget build(BuildContext context) {
@@ -43,19 +44,19 @@ class _DeleteCarViewState extends State<DeleteCarView> {
   }
 
   void _obtPrecio(BuildContext context, String placa) {
-    // //Asignamos la placa a la llave en el caso que el cliente pague el carro
-    // llaveDelete = placa;
+    //Asignamos la placa a la llave en el caso que el cliente pague el carro
+    llaveDelete = placa;
 
-    // //Obtenemos el precio a cobrar por el tiempo de parqueo
-    // int precio = obtPrecioAutoController(placa);
-    // //Obtenemos la información restante como el nombre del cliente y el modelo
-    // var informacion = infoClienteController(placa);
+    //Obtenemos el precio a cobrar por el tiempo de parqueo
+    int precio = getPrice(placa);
+    //Obtenemos la información restante como el nombre del cliente y el modelo
+    var informacion = getInfo(placa);
 
-    // //Una vez seleccionado el auto llamamos a la función mostrarDialogo
-    // //con la información del cliente y el monto a pagar el cual se envia mediante el parametro info.
-    // String info =
-    //     "El cliente: ${informacion[0]} con el auto modelo: ${informacion[1]} placa: $placa debe pagar un total de \$$precio";
-    // mostrarDialogo(context, info);
+    //Una vez seleccionado el auto llamamos a la función mostrarDialogo
+    //con la información del cliente y el monto a pagar el cual se envia mediante el parametro info.
+    String info =
+        "El cliente: ${informacion[0]} con el auto modelo: ${informacion[1]} placa: $placa debe pagar un total de \$$precio";
+    mostrarDialogo(context, info);
   }
 
   void mostrarDialogo(BuildContext context, String info) {
@@ -87,11 +88,11 @@ class _DeleteCarViewState extends State<DeleteCarView> {
   }
 
   void pagado(BuildContext context) {
-    // setState(() {
-    //   //Mandamos a llamar a la función que liberara el espacio de parqueo
-    //   parqueoPagadoController(llaveDelete);
-    //   listaOcupados.remove(llaveDelete);
-    //   // Navigator.pushNamed(context, "MainView");
-    // });
+    setState(() {
+      //Mandamos a llamar a la función que liberara el espacio de parqueo
+      parkPay(llaveDelete);
+      listaOcupados.remove(llaveDelete);
+      // Navigator.pushNamed(context, "MainView");
+    });
   }
 }

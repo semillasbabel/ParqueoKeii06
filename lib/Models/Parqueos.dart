@@ -5,7 +5,6 @@ import 'package:appbasica/Models/BD.dart';
 var parks = Parkings();
 var listaOcupados = <String>[];
 
-//Asignar la cantidad de parqueos que desea el cliente
 void setparksnumbers(int cantidad) {
   parks.Cant = cantidad;
 }
@@ -14,7 +13,6 @@ int getplaquesnumber() {
   return parks.CantPlaques;
 }
 
-// Obtener la cantidad de parqueos ingresada por el usuario
 int getparksnumbers() {
   return parks.Quantity;
 }
@@ -24,4 +22,32 @@ void clearAndFillTheBusyList() {
   parks.GetPlaques.forEach((key, value) {
     listaOcupados.add(key);
   });
+}
+
+bool validateplaque(String placa) {
+  bool result = true;
+
+  parks.GetPlaques.forEach((key, value) {
+    if (key == placa) {
+      result = false;
+    }
+  });
+
+  return result;
+}
+
+void newCarinPark(String plaque, String model, String name) {
+  parks.NewCar(plaque, model, name);
+}
+
+int getPricePark(String placa) {
+  return parks.GetPrice(placa);
+}
+
+List getInfoClient(String placa) {
+  return parks.GetInfoClient(placa);
+}
+
+void carParkPay(String placa) {
+  parks.OldCar(placa);
 }

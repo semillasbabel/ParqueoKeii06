@@ -1,5 +1,6 @@
 // ignore_for_file: file_names, deprecated_member_use
 
+import 'package:appbasica/Controller/MainController.dart';
 import 'package:flutter/material.dart';
 
 class AddCarView extends StatefulWidget {
@@ -93,27 +94,27 @@ class _AddCarViewState extends State<AddCarView> {
   }
 
   void _btnaddcar(BuildContext context) {
-    // //Validación echa desde el validator en el boton
-    // if (llaveformulario.currentState!.validate()) {
-    //   llaveformulario.currentState!.save();
-    //   //------------------------------------------------------
-    //   //Validamos que la placa ya haya sido ingresada
-    //   if (valiPlacaController(placaAuto) == true) {
-    //     //-------------------------------
-    //     //Validamos que hayan campos disponibles
-    //     if (disponibilidadController() == 0) {
-    //       mostrarAviso(context, "Ya no existen mas campos disponibles");
-    //     } else {
-    //       //Añadimos un nuevo auto
-    //       nuevoAutoController(placaAuto, modeloAuto, nombreCliente);
-    //       Navigator.pop(context, "MainView");
-    //     }
-    //     //-------------------------------
-    //   } else {
-    //     mostrarAviso(context, "La placa ingresada ya se encuntra registrada");
-    //   }
-    //   //------------------------------------------------------
-    // }
+    //Validación echa desde el validator en el boton
+    if (llaveformulario.currentState!.validate()) {
+      llaveformulario.currentState!.save();
+      //------------------------------------------------------
+      //Validamos que la placa ya haya sido ingresada
+      if (validationPlaque(placaAuto) == true) {
+        //-------------------------------
+        //Validamos que hayan campos disponibles
+        if (getQuantityPlaques() == quantityParks()) {
+          mostrarAviso(context, "Ya no existen mas campos disponibles");
+        } else {
+          //Añadimos un nuevo auto
+          newCar(placaAuto, modeloAuto, nombreCliente);
+          Navigator.pop(context, "MainView");
+        }
+        //-------------------------------
+      } else {
+        mostrarAviso(context, "La placa ingresada ya se encuntra registrada");
+      }
+      //------------------------------------------------------
+    }
   }
 
   void mostrarAviso(BuildContext context, String info) {

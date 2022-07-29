@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 //------------------------------------------------------------------------------
 class MainView extends StatefulWidget {
   const MainView({Key? key}) : super(key: key);
-
   @override
   State<MainView> createState() => _MainViewState();
 }
@@ -53,13 +52,16 @@ class _MainViewState extends State<MainView> {
 //------------------------------------------------------------------------------
 //------------------------------------------------------------------------------
 void entradaAuto(BuildContext context) {
-  // Validación si hay campos disponibles para agregar un nuevo auto
-  if (getQuantityPlaques() == quantityParks()) {
-    //Mensaje en caso que no hayan mas espacios disponibles
-    mostrarAviso(context, "¡No hay mas espacios disponibles!");
+  if (quantityParks() == 0) {
   } else {
-    //Navegación a la ventana AddCar
-    Navigator.pushNamed(context, "AddCar");
+    // Validación si hay campos disponibles para agregar un nuevo auto
+    if (getQuantityPlaques() == quantityParks()) {
+      //Mensaje en caso que no hayan mas espacios disponibles
+      mostrarAviso(context, "¡No hay mas espacios disponibles!");
+    } else {
+      //Navegación a la ventana AddCar
+      Navigator.pushNamed(context, "AddCar");
+    }
   }
 }
 
@@ -105,5 +107,6 @@ void mostrarAviso(BuildContext context, String info) {
       //Ocultar el dialogo al precionar fuera de el
       barrierDismissible: true);
 }
+
 //------------------------------------------------------------------------------
 //------------------------------------------------------------------------------
