@@ -1,4 +1,4 @@
-// ignore_for_file: file_names, must_be_immutable, non_constant_identifier_names, deprecated_member_use, empty_catches
+// ignore_for_file: file_names, must_be_immutable, non_constant_identifier_names, deprecated_member_use, empty_catches, body_might_complete_normally_nullable
 
 import 'package:appbasica/Controller/MainController.dart';
 import 'package:flutter/material.dart';
