@@ -56,35 +56,42 @@ class QuantityView extends StatelessWidget {
   void _btnadd(BuildContext context) {
     if (llaveformulario.currentState!.validate()) {
       llaveformulario.currentState!.save();
-
-      try {
-        setparks(int.parse(Quantity));
-        Navigator.pop(context, "AddCant");
-      } catch (e) {
-        showDialog(
-            context: context,
-            builder: (BuildContext context) {
-              return AlertDialog(
-                title: const Text("¡Información!"),
-                content: const Text("Debe ingresar un numero mayor a 0"),
-                actions: [
-                  //----------------------------------
-                  //Buton OK para salir del AlertDialog
-                  FlatButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      child: const Text("OK"))
-                  //----------------------------------
-                ],
-                // Codigo para darle border redondos al cuadro del AlertDialog
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10)),
-              );
-            },
-            //Ocultar el dialogo al precionar fuera de el
-            barrierDismissible: true);
+      if (Quantity == "0") {
+        dialogo(context, "Debe ingresar un numero mayor a 0");
+      } else {
+        try {
+          setparks(int.parse(Quantity));
+          Navigator.pop(context, "AddCant");
+        } catch (e) {
+          dialogo(context, "Debe ingresar un numero mayor a 0");
+        }
       }
     }
+  }
+
+  void dialogo(BuildContext context, String info) {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text("¡Información!"),
+            content: Text(info),
+            actions: [
+              //----------------------------------
+              //Buton OK para salir del AlertDialog
+              FlatButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: const Text("OK"))
+              //----------------------------------
+            ],
+            // Codigo para darle border redondos al cuadro del AlertDialog
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+          );
+        },
+        //Ocultar el dialogo al precionar fuera de el
+        barrierDismissible: true);
   }
 }
